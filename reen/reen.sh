@@ -76,6 +76,8 @@ function validate_file {
 
 function main {
 
+  start_time="$(date -u +%s)"
+
   # Validations
   validate_file $SOURCE_FILE;
   
@@ -111,18 +113,23 @@ function main {
       then
         if [ -f "${i}" ]; # If its a file and exists
         then
-          log_level "0" "Backing up file ${i}"
+          echo -n -e "\t${YELLOW} 🕑 Backing up file ${i}${RESET}" 
           rsync "${i}" "${DEST}"
+          echo  -e "\r\t${GREEN} ✅ Done file ${i} ${RESET}          " 
         else
           log_level "1" "Directory or file ${i} not found"
         fi
       else
-        log_level "0" "Backing up directory ${i}"
+        echo -n -e "\t${YELLOW} 🕑 Backing up directory ${i}${RESET}" 
         rsync -a --exclude-from={"${IGNORE_FILE}",} "${i}"  "${DEST}"
+        echo  -e "\r\t${GREEN} ✅ Done directory ${i} ${RESET}          " 
       fi
     fi
   done
 
+  end_time="$(date -u +%s)"
+  elapsed="$(($end_time-$start_time))"
+  echo -e "\nBackup finished in $elapsed seconds."
   # tree "${DEST}";
 }
 
