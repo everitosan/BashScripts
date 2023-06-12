@@ -7,7 +7,7 @@ This is a bash script that enable easy backups based in rsync.
 ## Install
 
 ```bash
-$ curl  https://raw.githubusercontent.com/everitosan/BashScripts/main/reen/reen.sh -o /usr/local/bin/reen
+curl  https://raw.githubusercontent.com/everitosan/BashScripts/main/reen/reen.sh -o /usr/local/bin/reen && chmod +X /usr/local/bin/reen
 ```
 
 **Parameters**
