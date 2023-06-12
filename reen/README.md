@@ -33,6 +33,7 @@ $ reen -h
 ```txt
 /home/evesan/Work
 /home/evesan/Descargas
+/home/evesan/bin/SATSign
 ```
 
 
@@ -41,3 +42,7 @@ $ reen -h
 node_modules
 target
 ```
+
+**Output**  
+
+![](./output.png)
