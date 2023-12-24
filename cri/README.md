@@ -7,6 +7,13 @@ Este script de bash, toma como entrada un archivo config de ssh con una lista de
 Es un auxiliar para ejecutar un script en varios servidores de forma secuencial.
 
 
+## Instalación
+
+```bash
+curl  https://raw.githubusercontent.com/everitosan/BashScripts/main/cri/cri.sh -o /usr/local/bin/cri && chmod +X /usr/local/bin/cri
+```
+
+
 **Parámetros**
 
 ```bash
@@ -37,7 +44,7 @@ IdentityFile /home/evesan/.ssh/keys/git/gitlab
 ```
 
 **-a**  
-*El archivo a ejecutar puede contener cualquier cdigo bash válido, los permisos dependerán ya del usuario con el que se ejecuta el script.*
+*El archivo a ejecutar puede contener cualquier código bash válido, los permisos dependerán ya del usuario con el que se ejecuta el script.*
 
 Ejemplo de script:
 
