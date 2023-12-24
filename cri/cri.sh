@@ -17,12 +17,18 @@ SOURCE="";
 SCRIPT="";
 # Mode of the execution
 MODE="IdentityFile"
+# Index of only server to affect
+SERVER_INDEX=""
 
 function help {
   echo -e "Opciones:
+
   -s [ruta de config con hostnames de los servidores]
   -a [ruta de script a ejecutar en elos servidores remotamente]
-  -p [bandera para indicar si usará contraseña escrita en password.txt]
+* -i [índice del servidor a afectar]
+* -p [bandera para indicar si usará contraseña escrita en password.txt]
+
+* Parámetros opcionales
   ";
 }
 
@@ -74,8 +80,15 @@ function main {
     exit_error "⚙️  El script '${SCRIPT}' no existe";
   fi
 
+  # Validamos los servidores a afectar
+  if [[ -n $SERVER_INDEX ]]; then
+    rows=$(grep "Host " $SOURCE | awk -v i=$SERVER_INDEX  'NR==i{print $2}');
+  else
+    rows=$(grep "Host " $SOURCE | awk '{print $2}');
+  fi
 
-  for host in $(grep "Host " $SOURCE | awk '{print $2}'); do
+
+  for host in $rows; do
     server_info $host;
 
     if [[ "$MODE" == "IdentityFile" ]]; then
@@ -92,13 +105,16 @@ function main {
 ####
 header;
 
-while getopts ":h :pa:s:" option; do
+while getopts ":h :pa:s:i:" option; do
   case $option in
     a)
       SCRIPT=$OPTARG;
       ;;
     s)
       SOURCE=$OPTARG;
+      ;;
+    i)
+      SERVER_INDEX=$OPTARG;
       ;;
     p)
       MODE="password";

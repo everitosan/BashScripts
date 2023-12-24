@@ -27,10 +27,13 @@ $ cri -h
 Ejecución remota de scripts
   
 Opciones:
+
   -s [ruta de config con hostnames de los servidores]
   -a [ruta de script a ejecutar en elos servidores remotamente]
-  -p [bandera para indicar si usará contraseña escrita en password.txt]
+* -i [índice del servidor a afectar]
+* -p [bandera para indicar si usará contraseña escrita en password.txt]
 
+* Parámetros opcionales
 ```
 
 **-s**  
