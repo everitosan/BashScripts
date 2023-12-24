@@ -69,9 +69,9 @@ function main {
 
    # Valida que el archivo exista
   if test -e "$SCRIPT"; then
-    echo -e "${GREEN}Usando el script: ${SOURCE}${RESET}";
+    echo -e "${GREEN}Usando el script: ${SCRIPT}${RESET}";
   else
-    exit_error "⚙️  El script '${SOURCE}' no existe";
+    exit_error "⚙️  El script '${SCRIPT}' no existe";
   fi
 
 
