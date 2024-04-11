@@ -39,7 +39,7 @@ function exit_error {
 
 function server_info {
     echo -e "${YELLOW}
-🖥️  $1
+🖥️  ($2) $1
 ----------------------------
     ${RESET}";
 }
@@ -81,21 +81,23 @@ function main {
   fi
 
   # Validamos los servidores a afectar
-  if [[ -n $SERVER_INDEX ]]; then
+  if [[ -n $SERVER_INDEX ]]; then 
+    # if index is especified
     rows=$(grep "Host " $SOURCE | awk -v i=$SERVER_INDEX  'NR==i{print $2}');
   else
     rows=$(grep "Host " $SOURCE | awk '{print $2}');
   fi
 
-
+  COUNTER=1
   for host in $rows; do
-    server_info $host;
+    server_info $host $COUNTER;
 
     if [[ "$MODE" == "IdentityFile" ]]; then
       ssh $host 'bash -s arg' < $SCRIPT;
     else
       sshpass -f password.txt ssh $host 'bash -s arg' < $SCRIPT;
     fi
+    COUNTER=$(( COUNTER + 1 ))
   done
 
 }
