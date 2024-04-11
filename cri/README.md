@@ -40,10 +40,26 @@ Opciones:
 *El archivo config es como cualquier config de ssh, es script hara uso del `Host` definido para intentar la ejecución.*
 
 Ejemplo de config:
-```
-Host gitlab.com
-Hostname gitlab.com
-IdentityFile /home/evesan/.ssh/keys/git/gitlab
+```bash
+######
+# Server 1
+######
+Host <server-name>
+  Hostname <server-ip>
+  Port 22
+  User <User>
+  ServerAliveInterval 60
+  IdentityFile <path-to-server-key>
+
+######
+# Server 2
+######
+Host <server-name>
+  Hostname <server-ip>
+  Port 22
+  User <User>
+  ServerAliveInterval 60
+  IdentityFile <path-to-server-key>
 ```
 
 **-a**  
