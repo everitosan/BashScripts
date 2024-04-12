@@ -1,13 +1,14 @@
 #!/bin/bash
 
 # Version of the script
-VERSION="0.0.1"
+VERSION="0.0.2"
 
 ## Global colors
 BLUE="\e[34m";
 GREEN="\e[32m";
 RED="\e[31m";
 YELLOW="\e[33m"
+GRAY="\e[35m"
 RESET="\e[0m";
 
 
@@ -19,13 +20,16 @@ SCRIPT="";
 MODE="IdentityFile"
 # Index of only server to affect
 SERVER_INDEX=""
+# Indexes of servers to exclude
+EXCLUDE_INDEXES=()
 
 function help {
   echo -e "Opciones:
 
   -s [ruta de config con hostnames de los servidores]
   -a [ruta de script a ejecutar en elos servidores remotamente]
-* -i [índice del servidor a afectar]
+* -i [índice del único servidor a afectar de la lista]
+* -e [índices de servidores a excluir de la lista]
 * -p [bandera para indicar si usará contraseña escrita en password.txt]
 
 * Parámetros opcionales
@@ -40,6 +44,13 @@ function exit_error {
 function server_info {
     echo -e "${YELLOW}
 🖥️  ($2) $1
+----------------------------
+    ${RESET}";
+}
+
+function excluded_server_info {
+    echo -e "${GRAY}
+⚠️  ($2) $1 was excluded
 ----------------------------
     ${RESET}";
 }
@@ -88,15 +99,36 @@ function main {
     rows=$(grep "Host " $SOURCE | awk '{print $2}');
   fi
 
+
+  # Save the current IFS value
+  old_ifs="$IFS"
+  # Set IFS to ';,'
+  IFS=';,'
+  # Read the string into an array
+  read -ra allExcluded <<< "$EXCLUDE_INDEXES"
+  # Restore the old IFS value
+  IFS="$old_ifs"
+
+  # for excluded in "${allExcluded[@]}"; do
+  #   echo "Excluded $excluded"
+  # done
+
   COUNTER=1
   for host in $rows; do
-    server_info $host $COUNTER;
-
-    if [[ "$MODE" == "IdentityFile" ]]; then
-      ssh $host 'bash -s arg' < $SCRIPT;
+    if [[ $(echo ${allExcluded[@]} | fgrep -w $COUNTER) ]]
+    then
+      excluded_server_info $host $COUNTER;
     else
-      sshpass -f password.txt ssh $host 'bash -s arg' < $SCRIPT;
+      server_info $host $COUNTER;
+
+      # Use password strategy
+      if [[ "$MODE" == "IdentityFile" ]]; then
+        ssh $host 'bash -s arg' < $SCRIPT;
+      else
+        sshpass -f password.txt ssh $host 'bash -s arg' < $SCRIPT;
+      fi
     fi
+
     COUNTER=$(( COUNTER + 1 ))
   done
 
@@ -107,7 +139,7 @@ function main {
 ####
 header;
 
-while getopts ":h :pa:s:i:" option; do
+while getopts ":h :pa:s:i:e:" option; do
   case $option in
     a)
       SCRIPT=$OPTARG;
@@ -117,6 +149,9 @@ while getopts ":h :pa:s:i:" option; do
       ;;
     i)
       SERVER_INDEX=$OPTARG;
+      ;;
+    e)
+      EXCLUDE_INDEXES=$OPTARG;
       ;;
     p)
       MODE="password";

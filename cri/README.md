@@ -14,6 +14,12 @@ curl  https://raw.githubusercontent.com/everitosan/BashScripts/main/cri/cri.sh -
 ```
 
 
+**Uso**
+
+```bash
+cri -s ~/.ssh/config.d/sat/Chiikul/pro -a ./example.sh -e 1,2
+```
+
 **Parámetros**
 
 ```bash
@@ -22,7 +28,7 @@ $ cri -h
 
 █─▄▄▄─█▄─▄▄▀█▄─▄█
 █─███▀██─▄─▄██─██
-▀▄▄▄▄▄▀▄▄▀▄▄▀▄▄▄▀  (0.0.1)
+▀▄▄▄▄▄▀▄▄▀▄▄▀▄▄▄▀  (0.0.2)
 
 Ejecución remota de scripts
   
@@ -31,6 +37,7 @@ Opciones:
   -s [ruta de config con hostnames de los servidores]
   -a [ruta de script a ejecutar en elos servidores remotamente]
 * -i [índice del servidor a afectar]
+* -e [índices de servidores a excluir de la lista]
 * -p [bandera para indicar si usará contraseña escrita en password.txt]
 
 * Parámetros opcionales
