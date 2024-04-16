@@ -1,13 +1,13 @@
-# Reen script
-
+# Reen script  
 Backup utility based in rsync.
 
-This is a bash script that enable easy backups based in rsync.
+| **Reen** *(Esperanto)*: back, backwards, once again.
+
 
 ## Install
 
 ```bash
-curl  https://raw.githubusercontent.com/everitosan/BashScripts/main/reen/reen.sh -o /usr/local/bin/reen && chmod +X /usr/local/bin/reen
+curl  https://raw.githubusercontent.com/everitosan/BashScripts/main/reen/reen.sh -o /usr/local/bin/reen && sudo chmod 755 /usr/local/bin/reen
 ```
 
 **Parameters**
