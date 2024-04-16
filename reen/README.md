@@ -7,7 +7,7 @@ Backup utility based in rsync.
 ## Install
 
 ```bash
-curl  https://raw.githubusercontent.com/everitosan/BashScripts/main/reen/reen.sh -o /usr/local/bin/reen && sudo chmod 755 /usr/local/bin/reen
+curl  https://raw.githubusercontent.com/everitosan/BashScripts/main/reen/reen.sh -o /usr/local/bin/reen && sudo chmod 744 /usr/local/bin/reen
 ```
 
 **Parameters**
