@@ -101,11 +101,15 @@ function validate_version {
   for (( i=0; i<${length}; i++ )); do
     av=$(("${actual_v[$i]}"))
     nv=$(("${new_v[$i]}"))
-    # printf "Current index %d with value %s\n" $i "${new_v[$i]}"
+    # echo "${av} - ${nv}"
+
     if [[ "$av" -gt "$nv" ]]; then
-      echo -e "${YELLOW}
-** Actual version ${ACTUAL_VERSION} is higher than ${NEW_VERSION},  use -f to avoid this check ${RESET}";
+      echo -e "${YELLOW}\n** Actual version ${ACTUAL_VERSION} is higher than ${NEW_VERSION},  use -f to avoid this check ${RESET}";
       exit 1;
+    else
+      if [[ ! "$av" -eq "$nv" ]]; then
+        break
+      fi
     fi
   done
 }
@@ -127,7 +131,7 @@ function header {
 ███████████████
 █▄─▀█▄─▄█▄─█─▄█
 ██─█▄▀─███▄─▄██
-▀▄▄▄▀▀▄▄▀▀▄▄▄▀▀  
+▀▄▄▄▀▀▄▄▀▀▄▄▄▀▀  に
 
 Version updater (${VERSION})${RESET}
 ";
