@@ -6,5 +6,6 @@ This repo contains scripts that may be helpful for several tasks.
 - [systemD](./systemd/)
 - [Reen](./reen/)
 - [Cri](./cri/)
+- [Ny](./ny/)
 
 
