@@ -167,9 +167,9 @@ function main {
   fi
   echo -e "Moving to version: ${GREEN}${NEW_VERSION}${RESET}";
   set_version;
-# git add "${VERSION_FILE}";
-# git commit -m "version: set v${NEW_VERSION}"
-# git tag "v${NEW_VERSION}";
+  git add "${VERSION_FILE}";
+  git commit -m "version: set v${NEW_VERSION}"
+  git tag "v${NEW_VERSION}";
 }
 
 
