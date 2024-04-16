@@ -27,9 +27,9 @@ function recognize_version {
     PLATFORM="${NODEJS}";
     VERSION_FILE="package.json";
   fi
-  if [ -f  "cargo.toml" ]; then
+  if [ -f  "Cargo.toml" ]; then
     PLATFORM="${RUST}";
-    VERSION_FILE="cargo.toml";
+    VERSION_FILE="Cargo.toml";
   fi
 }
 
