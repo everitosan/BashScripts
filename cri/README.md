@@ -10,7 +10,7 @@ Es un auxiliar para ejecutar un script en varios servidores de forma secuencial.
 ## Instalación
 
 ```bash
-curl  https://raw.githubusercontent.com/everitosan/BashScripts/main/cri/cri.sh -o /usr/local/bin/cri && chmod +X /usr/local/bin/cri
+sudo curl  https://raw.githubusercontent.com/everitosan/BashScripts/main/cri/cri.sh -o /usr/local/bin/cri && sudo chmod +X /usr/local/bin/cri
 ```
 
 
