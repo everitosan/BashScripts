@@ -79,7 +79,7 @@ function set_node_version {
 # #######
 
 function get_rust_version {
-  ACTUAL_VERSION=$(cat "${VERSION_FILE}" | grep version | awk '{ print $3 }' | sed 's/"//g' );
+  ACTUAL_VERSION=$(cat "${VERSION_FILE}" | grep version | awk 'NR==1{ print $3 }' | sed 's/"//g' );
 }
 
 function set_rust_version {
