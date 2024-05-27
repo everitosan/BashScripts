@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Version of the script
-VERSION="0.0.2"
+VERSION="0.0.3"
 
 ## Global colors
 BLUE="\e[34m";
@@ -22,14 +22,17 @@ MODE="IdentityFile"
 SERVER_INDEX=""
 # Indexes of servers to exclude
 EXCLUDE_INDEXES=()
+# Extra variables
+VARIABLE_EXTRA=""
 
 function help {
   echo -e "Opciones:
 
   -s [ruta de config con hostnames de los servidores]
   -a [ruta de script a ejecutar en elos servidores remotamente]
+* -v [variabes extras para ejecución del script]
 * -i [índice del único servidor a afectar de la lista]
-* -e [índices de servidores a excluir de la lista]
+* -e [índices de servidores a excluir de la lista separador por ',' ó ';']
 * -p [bandera para indicar si usará contraseña escrita en password.txt]
 
 * Parámetros opcionales
@@ -123,9 +126,9 @@ function main {
 
       # Use password strategy
       if [[ "$MODE" == "IdentityFile" ]]; then
-        ssh $host 'bash -s arg' < $SCRIPT;
+        ssh $host "${VARIABLE_EXTRA}" 'bash -s' < $SCRIPT;
       else
-        sshpass -f password.txt ssh $host 'bash -s arg' < $SCRIPT;
+        sshpass -f password.txt ssh $host "${VARIABLE_EXTRA}" 'bash -s' < $SCRIPT;
       fi
     fi
 
@@ -139,13 +142,16 @@ function main {
 ####
 header;
 
-while getopts ":h :pa:s:i:e:" option; do
+while getopts ":h :pa:s:i:e:v:" option; do
   case $option in
     a)
       SCRIPT=$OPTARG;
       ;;
     s)
       SOURCE=$OPTARG;
+      ;;
+    v)
+      VARIABLE_EXTRA=$OPTARG;
       ;;
     i)
       SERVER_INDEX=$OPTARG;
