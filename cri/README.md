@@ -10,7 +10,7 @@ Es un auxiliar para ejecutar un script en varios servidores de forma secuencial.
 ## Instalación
 
 ```bash
-sudo curl  https://raw.githubusercontent.com/everitosan/BashScripts/main/cri/cri.sh -o /usr/local/bin/cri && sudo chmod +X /usr/local/bin/cri
+sudo curl  https://raw.githubusercontent.com/everitosan/BashScripts/main/cri/cri.sh -o /usr/local/bin/cri && sudo chmod +x /usr/local/bin/cri
 ```
 
 
@@ -28,7 +28,7 @@ $ cri -h
 
 █─▄▄▄─█▄─▄▄▀█▄─▄█
 █─███▀██─▄─▄██─██
-▀▄▄▄▄▄▀▄▄▀▄▄▀▄▄▄▀  (0.0.2)
+▀▄▄▄▄▄▀▄▄▀▄▄▀▄▄▄▀  (0.0.3)
 
 Ejecución remota de scripts
   
@@ -36,8 +36,9 @@ Opciones:
 
   -s [ruta de config con hostnames de los servidores]
   -a [ruta de script a ejecutar en elos servidores remotamente]
+* -v [variabes extras para ejecución del script]
 * -i [índice del servidor a afectar]
-* -e [índices de servidores a excluir de la lista]
+* -e [índices de servidores a excluir de la lista separador por ',' ó ';']
 * -p [bandera para indicar si usará contraseña escrita en password.txt]
 
 * Parámetros opcionales
@@ -78,6 +79,16 @@ Ejemplo de script:
 #!/bin/bash
 ls;
 ```
+
+**-v**  
+*Si se incluye, setea las variables en el script con el valor definido.*
+
+En el ejemplo, al ejecutar el script `env.sh` existirá una variable llamada PERSIST con valor igual a '0':
+
+```bash
+$ cri -s ~/.ssh/config.d/sat/Chiikul/web -a ./scripts/prod/env.sh -v "PERSIST='0'" 
+```
+
 
 **-p**  
 *Si se incluye esta bandera en la ejecución, el script intentará hacer uso de [sshpass](https://linux.die.net/man/1/sshpass), por lo que debe existir un archivo `password.txt` al mismo nivel de la ejecución del script.*
