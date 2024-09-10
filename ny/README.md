@@ -6,7 +6,7 @@ Script to update versions in source code.
 ## Install
 
 ```bash
-sudo curl https://raw.githubusercontent.com/everitosan/BashScripts/main/ny/ny.sh -o /usr/local/bin/ny && sudo chmod +X /usr/local/bin/ny
+sudo curl https://raw.githubusercontent.com/everitosan/BashScripts/main/ny/ny.sh -o /usr/local/bin/ny && sudo chmod 755 /usr/local/bin/ny
 ```
 
 
